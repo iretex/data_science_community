@@ -1,5 +1,5 @@
 -- COPY orders FROM 'data/orders.csv' DELIMITER ',' - doesn't work with SQL Server
-DROP TABLE accounts;
+DROP TABLE sales_reps;
 
 CREATE TABLE orders (
     id	int IDENTITY(1,1) PRIMARY KEY,
@@ -33,13 +33,13 @@ CREATE TABLE accounts (
 )
 
 CREATE TABLE sales_reps (
-    id INT IDENTITY(1,1) PRIMARY KEY,
+    id INT PRIMARY KEY,
     name VARCHAR(64),
     region_id INT
 )
 
-BULK INSERT accounts
-FROM 'D:\NG005454\Documents\Data Science\SQL\nd104-ent-bmann\data\accounts.csv'
+BULK INSERT sales_reps
+FROM 'D:\NG005454\Documents\Data Science\SQL\nd104-ent-bmann\data\sales_reps.csv'
 WITH
 (
     FIRSTROW = 2, -- as 1st one is header
