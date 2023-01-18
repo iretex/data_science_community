@@ -26,7 +26,20 @@ ORDER BY account_id
  ON a.sales_rep_id = s.id
  JOIN region r
  ON r.id = s.region_id
---  WHERE COUNT(r.name) > 1
+ WHERE a.name in (
+    SELECT a.name
+    FROM (
+         SELECT a.name account_name, COUNT(r.name) region_name
+         FROM accounts a
+         JOIN sales_reps s
+         ON a.sales_rep_id = s.id
+         JOIN region r
+         ON r.id = s.region_id
+         GROUP BY a.name
+         HAVING COUNT(r.name) > 1
+    ) reg_c
+    -- WHERE region_count > 1
+    )
  ORDER BY account_name, region_name
 
 
